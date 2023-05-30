@@ -4,15 +4,31 @@ using DataAccess.Concrete.InMemory;
 
 namespace ConsoleUI
 {
-     class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            ProductTest();
-
+            //ProductTest();
             //CategoryTest();
 
-            
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            var result = productManager.GetProductDetails();
+
+            if (result.Success)
+            {
+                foreach (var p in result.Data)
+                {
+                    Console.WriteLine("{0} & {1}", p.ProductName, p.CategoryName);
+
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
 
         }
 
@@ -30,9 +46,9 @@ namespace ConsoleUI
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var product in productManager.GetProductDetails())
+            foreach (var product in productManager.GetProductDetails().Data)
             {
-                Console.WriteLine("{0} - {1}",product.ProductName,product.CategoryName);
+                Console.WriteLine("{0} - {1}", product.ProductName, product.CategoryName);
             }
         }
     }
