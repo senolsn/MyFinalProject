@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Aspects.Autofac.Performance;
 using System.Reflection;
 
 namespace Core.Utilities.Interceptors
@@ -16,6 +17,7 @@ namespace Core.Utilities.Interceptors
 
             classAttributes.AddRange(methodAttributes);   //Bu kod kısaca hem ProductManager class'ı için içeren attributeları ve ProductManager'in içindeki Metotları kapsayan attribute'ları
                                                           //örneğin Add methodunun attributelarını bir sıraya koymaya yarar.
+            //classAttributes.Add(new PerformanceAspect(5)); // tüm metotlarda performance aspect'e bakar
 
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
