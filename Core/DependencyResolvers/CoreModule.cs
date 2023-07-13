@@ -16,7 +16,7 @@ namespace Core.DependencyResolvers
     {
         public void Load(IServiceCollection serviceCollection)
         {
-            //Program.cs'de IoC container yaptığımız yeri buraya taşıdık. Aynı işlem farklı teknik.
+            //Program.cs'de IoC container yaptığımız yeri buraya taşıdık. Aynı işlem farklı teknik. Not : Program.cs de artık bu DI IoC yapılandırmasını çağırıyoruz onunla karıştırma.
             //Neden böyle yaptık bunlar Dependency Chain dışında ve Başka bir uygulamada da aynı kodu kullanabileceğimiz için API'den alıp Core'a taşıdık.
             serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
