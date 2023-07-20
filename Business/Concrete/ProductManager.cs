@@ -32,7 +32,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))] //instance değil tip gönderilir.
-        [SecuredOperation("product.add")]
+        //[SecuredOperation("product.add")]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
