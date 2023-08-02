@@ -25,14 +25,14 @@ namespace Business.Concrete
     {
         IProductDal _productDal;
         ICategoryService _categoryService;
-        public ProductManager(IProductDal productDal,ICategoryService categoryService)
+        public ProductManager(IProductDal productDal, ICategoryService categoryService)
         {
             _productDal = productDal;
             _categoryService = categoryService;
         }
 
         [ValidationAspect(typeof(ProductValidator))] //instance değil tip gönderilir.
-        //[SecuredOperation("product.add")]
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {

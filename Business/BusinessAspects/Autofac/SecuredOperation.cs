@@ -10,16 +10,19 @@ namespace Business.BusinessAspects.Autofac
 {
     public class SecuredOperation : MethodInterception
     {
+        //Autofac paketinde yaptığımız IoC new'leme işleminin bir farklı alternatifidir. 
+        // neden bunu kullanıyoruz WinForm gibi yapılar kullanırken bu şekilde IoC yapıyoruz.
+        // Normalde Dependency injection yemez cünkü bu chainimizin dışında DA > Business >API bunlar chain şeklinde fakat Aspectler öyle
+        //değil o yüzden bu şekilde newliyoruz
+
         private string[] _roles;
         private IHttpContextAccessor _httpContextAccessor;
 
         public SecuredOperation(string roles)
         {
             _roles = roles.Split(',');
-            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>(); //Autofac paketinde yaptığımız IoC new'leme işleminin bir farklı alternatifidir. 
-            // neden bunu kullanıyoruz WinForm gibi yapılar kullanırken bu şekilde IoC yapıyoruz.
-            // Normalde Dependency injection yemez cünkü bu chainimizin dışında DA > Business >API bunlar chain şeklinde fakat Aspectler öyle
-            //değil o yüzden bu şekilde newliyoruz
+            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
+
         }
 
         protected override void OnBefore(IInvocation invocation)
@@ -36,3 +39,5 @@ namespace Business.BusinessAspects.Autofac
         }
     }
 }
+
+
